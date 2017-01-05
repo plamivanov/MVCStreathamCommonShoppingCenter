@@ -1,0 +1,21 @@
+﻿@model OnlineShoppingStore.WebUI.Models.ProductsListViewModel
+@{
+    ViewBag.Title = "List of Products";
+}
+
+<h2>List</h2>
+@foreach (var p in Model.Products)
+{
+    @*<div class="well">
+        <h3>
+            <strong>@p.Name</strong>
+            <span class="label pull-right label-primary">@p.Price</span>
+        </h3>
+        
+        <span class="lead">@p.Description</span>
+    </div>*@
+    @Html.Partial("_ProductSummery",p)
+}
+<div class="btn-group ">
+    @Html.PageLinks(Model.PagingInfo,x => Url.Action("List",new { page = x, category= Model.CurrentCategory }))
+</div>

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<OnlineShoppingStore.Domain.Entities.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .link-lookalike {
+    background: none;
+    border: none;
+    color: #428bca;
+    cursor: pointer;
+}
+</style>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div>All Products</div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-condensed table-bordered ">
+            <tr>
+               <th class="text-right ">
+                ID
+                </th>
+                <th class="text-right ">
+                    NAme
+                </th>
+                <th class="text-right ">Discription</th>
+                <th class="text-right ">Price</th>
+                <th class="text-right ">Gender </th>
+                <th class="text-right ">Actions</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductId)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                        @using (Html.BeginForm("Delete", "Admin"))
+                        {
+                            @Html.Hidden("ProductId", item.ProductId)
+                            <input type="submit" value="Delete" class="link-lookalike" />
+                        }
+                    </td>
+                </tr>
+                        }
+
+
+        </table>
+</div>
+    <div class="panel-footer">
+        @Html.ActionLink("CAdd new product", "Create",null,new { @class = "btn btn-primary" })
+    </div>
+</div>
+
